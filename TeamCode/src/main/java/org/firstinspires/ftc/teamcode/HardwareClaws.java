@@ -58,7 +58,7 @@ public class HardwareClaws
     public void init() {
 
         // Define and Initialize Motors
-        Arm = hwMap.get(DcMotor.class, "left_arm");
+        Arm = hwMap.get(DcMotor.class, "arm");
 
         // Set all motors to zero power
         Arm.setPower(0);

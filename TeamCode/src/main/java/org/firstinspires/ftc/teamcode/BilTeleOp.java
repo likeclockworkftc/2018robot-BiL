@@ -25,11 +25,6 @@ public class BilTeleOp extends OpMode{
     private HardwareMap hwMap = null;
     private HardwareClaws robot = new HardwareClaws();
 
-    private DcMotor arm = null;
-
-    private Servo leftClaw = null;
-    private Servo rightClaw = null;
-
     public double clawOffset =  0.5;
     public double clawSpeed = 0.01;
 
@@ -50,11 +45,6 @@ public class BilTeleOp extends OpMode{
             ExceptionHandling.standardExceptionHandling(e, this);
         }
 
-
-        leftClaw = hwMap.get(Servo.class, "left_hand");
-        rightClaw = hwMap.get(Servo.class, "right_hand");
-        leftClaw.setPosition(clawOffset);
-        rightClaw.setPosition(clawOffset);
     }
 
     @Override
