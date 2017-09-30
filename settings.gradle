@@ -1,3 +1,3 @@
-include ':FtcRobotController', ':2017robotbil'
+include ':FtcRobotController'
 include ':NinevoltLib'
 include ':TeamCode'

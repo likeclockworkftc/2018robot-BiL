@@ -47,11 +47,7 @@ public class BilAutonomous extends LinearOpMode {
 
 
 
-
         }
-
-
-
 
     }
 }
