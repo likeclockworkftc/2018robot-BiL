@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.vvftc.ninevolt.core.hw.Hardware;
 import com.vvftc.ninevolt.core.hw.HardwareBuilder;
 import com.vvftc.ninevolt.core.hw.drivetrain.standard.Movement;
@@ -42,11 +41,11 @@ public class BilAutonomous extends LinearOpMode {
         //Press start to play
         waitForStart();
 
-        while (opModeIsActive() || isStopRequested()) {
+        if (opModeIsActive()) {
             movement.directDrive(0, 0);
 
-
-
+        } else {
+            idle();
         }
 
     }
