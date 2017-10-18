@@ -63,11 +63,11 @@ public class BilTeleOp extends OpMode{
         robot.leftClaw.setPosition(robot.MID_SERVO + clawOffset);
         robot.rightClaw.setPosition(robot.MID_SERVO - clawOffset);
 
-        if (gamepad2.y)
-            robot.Arm.setPower(robot.ARM_UP_POWER);
-        else if (gamepad2.a)
-            robot.Arm.setPower(robot.ARM_DOWN_POWER);
-        else
-            robot.Arm.setPower(0.0);
+//        if (gamepad2.y)
+//            robot.Arm.setPower(robot.ARM_UP_POWER);
+//        else if (gamepad2.a)
+//            robot.Arm.setPower(robot.ARM_DOWN_POWER);
+//        else
+//            robot.Arm.setPower(0.0);
     }
 }
