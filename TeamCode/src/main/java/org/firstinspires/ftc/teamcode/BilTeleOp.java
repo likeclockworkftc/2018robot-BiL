@@ -50,7 +50,17 @@ public class BilTeleOp extends OpMode{
     @Override
     public void loop() {
         //robot moves from person 1's controller
-        movement.directDrive(gamepad1.left_stick_y, gamepad1.left_stick_x);
+
+        //- = goes forward
+        //+ = goes backwards
+
+        movement.directDrive(-gamepad1.left_stick_y, -gamepad1.left_stick_x);
+
+        hardware.motorFR.setPower(gamepad1.right_stick_x);
+        hardware.motorFL.setPower(gamepad1.right_stick_x);
+
+        hardware.motorFR.setPower(gamepad1.right_stick_y);
+        hardware.motorFL.setPower(gamepad1.right_stick_y);
 
 
         //person 2 controls robots arms/claws
