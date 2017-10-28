@@ -38,7 +38,10 @@ public class BilTeleOp extends OpMode{
                     .addMotorFR("motor_r");
             this.hardware = hb.build();
             hb = null;
+            //initialize robot parts
             hardware.init();
+            //initialize servos
+            robot.init(hardwareMap);
             movement = new Movement(hardware, this);
             movement.setVerbose(true);
         } catch(Exception e) {
@@ -54,13 +57,8 @@ public class BilTeleOp extends OpMode{
         //- = goes forward
         //+ = goes backwards
 
-        movement.directDrive(-gamepad1.left_stick_y, -gamepad1.left_stick_x);
 
-        hardware.motorFR.setPower(gamepad1.right_stick_x);
-        hardware.motorFL.setPower(gamepad1.right_stick_x);
-
-        hardware.motorFR.setPower(gamepad1.right_stick_y);
-        hardware.motorFL.setPower(gamepad1.right_stick_y);
+        movement.tankDrive(gamepad1.left_stick_y, gamepad1.right_stick_x);
 
 
         //person 2 controls robots arms/claws
