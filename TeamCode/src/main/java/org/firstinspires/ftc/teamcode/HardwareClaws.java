@@ -40,8 +40,8 @@ public class HardwareClaws
     /* Public OpMode members. */
 
     public DcMotor  Arm     = null;
-    public Servo    leftClaw    = null;
-    public Servo    rightClaw   = null;
+    public Servo    leftClaw;
+    public Servo    rightClaw;
 
     public static final double MID_SERVO       =  0.5 ;
     public static final double ARM_UP_POWER    =  0.45 ;
@@ -56,17 +56,19 @@ public class HardwareClaws
     }
 
     /* Initialize standard Hardware interfaces */
-    public void init() {
+    public void init(HardwareMap ahwMap) {
+
+        hwMap = ahwMap;
 
         // Define and Initialize Motors
-        Arm = hwMap.get(DcMotor.class, "arm");
+//        Arm = hwMap.get(DcMotor.class, "arm");
 
-        // Set all motors to zero power
-        Arm.setPower(0);
-
-        // Set all motors to run without encoders.
-        // May want to use RUN_USING_ENCODERS if encoders are installed.
-        Arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        // Set all motors to zero power
+//        Arm.setPower(0);
+//
+//        // Set all motors to run without encoders.
+//        // May want to use RUN_USING_ENCODERS if encoders are installed.
+//        Arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Define and initialize ALL installed servos.
         leftClaw  = hwMap.get(Servo.class, "left_hand");
