@@ -25,13 +25,12 @@ public class BilTeleOp extends OpMode{
     private HardwareMap hwMap = null;
     private HardwareClaws robot = new HardwareClaws();
 
-    public double clawOffset =  0;
-    final double clawSpeed = 0.02;
+    public double clawOffset =  0.5;
+    public double clawSpeed = 0.01;
 
 
     @Override
     public void init() {
-
         try {
             HardwareBuilder hb = new HardwareBuilder(hardwareMap);
             hb.setMotorConfig(Hardware.MotorMode.TWO_MOTORS, Hardware.MotorType.TETRIX_PITSCO)
@@ -39,10 +38,7 @@ public class BilTeleOp extends OpMode{
                     .addMotorFR("motor_r");
             this.hardware = hb.build();
             hb = null;
-            //initialize robot parts
             hardware.init();
-            //initialize servos
-            robot.init(hardwareMap);
             movement = new Movement(hardware, this);
             movement.setVerbose(true);
         } catch(Exception e) {
@@ -58,9 +54,9 @@ public class BilTeleOp extends OpMode{
         //- = goes forward
         //+ = goes backwards
 
-        movement.directDrive(gamepad1.left_stick_y, gamepad1.left_stick_x);
+        movement.directDrive(-gamepad1.left_stick_y, -gamepad1.left_stick_x);
 
-        hardware.motorFR.setPower(-gamepad1.right_stick_x);
+        hardware.motorFR.setPower(gamepad1.right_stick_x);
         hardware.motorFL.setPower(gamepad1.right_stick_x);
 
         hardware.motorFR.setPower(gamepad1.right_stick_y);
@@ -68,17 +64,14 @@ public class BilTeleOp extends OpMode{
 
 
         //person 2 controls robots arms/claws
-        if (gamepad2.right_bumper)
+        if (gamepad2.b)
             clawOffset += clawSpeed;
-        else if (gamepad2.left_bumper)
+        else if (gamepad2.x)
             clawOffset -= clawSpeed;
 
         clawOffset = Range.clip(clawOffset, -0.5, 0.5);
         robot.leftClaw.setPosition(robot.MID_SERVO + clawOffset);
         robot.rightClaw.setPosition(robot.MID_SERVO - clawOffset);
-
-        telemetry.addData("claw",  "Offset = %.2f", clawOffset);
-        telemetry.update();
 
 //        if (gamepad2.y)
 //            robot.Arm.setPower(robot.ARM_UP_POWER);
