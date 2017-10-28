@@ -146,7 +146,6 @@ public class Movement implements MovementBase {
 //  }
 
   public void tankDrive(double lDist, double rDist) {
-
   }
 
   public void directTankDrive(double left, double right) {

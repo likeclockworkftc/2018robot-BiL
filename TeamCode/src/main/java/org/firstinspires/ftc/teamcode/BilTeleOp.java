@@ -11,6 +11,8 @@ import com.vvftc.ninevolt.core.hw.HardwareBuilder;
 import com.vvftc.ninevolt.core.hw.drivetrain.standard.Movement;
 import com.vvftc.ninevolt.util.ExceptionHandling;
 
+import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
+
 
 /**
  * Created by ryankoo on 9/19/17.
@@ -23,10 +25,10 @@ public class BilTeleOp extends OpMode{
     private Movement movement;
 
     private HardwareMap hwMap = null;
-    private HardwareClaws robot = new HardwareClaws();
+    HardwareClaws robot = new HardwareClaws();
 
     public double clawOffset =  0.5;
-    public double clawSpeed = 0.01;
+    public double CLAW_SPEED = 0.02;
 
 
     @Override
@@ -58,15 +60,19 @@ public class BilTeleOp extends OpMode{
         //+ = goes backwards
 
 
-        movement.tankDrive(gamepad1.left_stick_y, gamepad1.right_stick_x);
+        movement.directTankDrive(gamepad1.left_stick_y, gamepad1.right_stick_y);
+
 
 
         //person 2 controls robots arms/claws
-        if (gamepad2.b)
-            clawOffset += clawSpeed;
-        else if (gamepad2.x)
-            clawOffset -= clawSpeed;
 
+        // Use gamepad left & right Bumpers to open and close the claw
+        if (gamepad2.right_bumper)
+            clawOffset += CLAW_SPEED;
+        else if (gamepad2.left_bumper)
+            clawOffset -= CLAW_SPEED;
+
+        // Move both servos to new position.  Assume servos are mirror image of each other.
         clawOffset = Range.clip(clawOffset, -0.5, 0.5);
         robot.leftClaw.setPosition(robot.MID_SERVO + clawOffset);
         robot.rightClaw.setPosition(robot.MID_SERVO - clawOffset);
