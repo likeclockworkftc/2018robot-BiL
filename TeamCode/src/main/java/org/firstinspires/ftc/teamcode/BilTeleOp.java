@@ -54,13 +54,8 @@ public class BilTeleOp extends OpMode{
         //- = goes forward
         //+ = goes backwards
 
-        movement.directDrive(-gamepad1.left_stick_y, -gamepad1.left_stick_x);
+        movement.tankDrive(gamepad1.left_stick_y, gamepad1.left_stick_x);
 
-        hardware.motorFR.setPower(gamepad1.right_stick_x);
-        hardware.motorFL.setPower(gamepad1.right_stick_x);
-
-        hardware.motorFR.setPower(gamepad1.right_stick_y);
-        hardware.motorFL.setPower(gamepad1.right_stick_y);
 
 
         //person 2 controls robots arms/claws
