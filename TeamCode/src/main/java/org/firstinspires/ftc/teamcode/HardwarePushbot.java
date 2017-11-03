@@ -30,27 +30,30 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.vvftc.ninevolt.core.hw.Hardware;
 
-public class HardwareClaws
+public class HardwarePushbot
 
 {
     /* Public OpMode members. */
     public Servo leftClaw = null;
     public Servo rightClaw = null;
+    public DcMotor leftArm = null;
+    public DcMotor rightArm = null;
 
     public static final double MID_SERVO = 0.5;
-    public static final double ARM_UP_POWER = 0.45;
-    public static final double ARM_DOWN_POWER = -0.45;
+    public static final double ARM_UP_POWER = -0.45;
+    public static final double ARM_DOWN_POWER = 0.45;
 
     /* local OpMode members. */
     HardwareMap hwMap = null;
 
     /* Constructor */
-    public HardwareClaws() {
+    public HardwarePushbot() {
 
     }
 
@@ -58,6 +61,19 @@ public class HardwareClaws
     public void init(HardwareMap ahwMap) {
         // Save reference to Hardware map
         hwMap = ahwMap;
+
+        // Define installed Motors
+        rightArm = hwMap.get(DcMotor.class, "right_arm");
+        leftArm = hwMap.get(DcMotor.class, "left_arm");
+        // Sets default power
+        rightArm.setPower(0);
+        leftArm.setPower(0);
+        // Sets motors to run without encoders
+        rightArm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftArm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        // Reverses the motors
+        // Right one is not reversed
+        leftArm.setDirection(DcMotor.Direction.REVERSE);
 
         // Define and initialize ALL installed servos.
         leftClaw = hwMap.get(Servo.class, "left_hand");
