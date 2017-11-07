@@ -3,11 +3,14 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.IntegratingGyroscope;
 import com.qualcomm.robotcore.util.Range;
 import com.vvftc.ninevolt.core.hw.Hardware;
 import com.vvftc.ninevolt.core.hw.HardwareBuilder;
 import com.vvftc.ninevolt.core.hw.drivetrain.standard.Movement;
 import com.vvftc.ninevolt.util.ExceptionHandling;
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 
 /**
@@ -22,7 +25,7 @@ public class BilTeleOp extends OpMode{
     private Movement movement;
 
     private HardwareMap hwMap = null;
-    HardwarePushbot robot = new HardwarePushbot();
+    private HardwarePushbot robot = new HardwarePushbot();
 
     public double clawOffset =  0.5;
     public double CLAW_SPEED = 0.02;
@@ -37,9 +40,9 @@ public class BilTeleOp extends OpMode{
                     .addMotorFR("motor_r");
             this.hardware = hb.build();
             hb = null;
-            //initialize robot parts
+            // initialize robot parts
             hardware.init();
-            //initialize servos
+            // initialize servos
             robot.init(hardwareMap);
             movement = new Movement(hardware, this);
             movement.setVerbose(true);
@@ -69,8 +72,11 @@ public class BilTeleOp extends OpMode{
 
         // Servos should move in unison
         clawOffset = Range.clip(clawOffset, -0.5, 0.5);
-        robot.leftClaw.setPosition(robot.MID_SERVO + clawOffset);
         robot.rightClaw.setPosition(robot.MID_SERVO - clawOffset);
+        robot.leftClaw.setPosition(robot.MID_SERVO + clawOffset);
+
+        telemetry.addData("claw",  "Offset = %.2f", clawOffset);
+        telemetry.update();
 
         // Motors should move in unison
         if (gamepad2.y) {
@@ -85,5 +91,8 @@ public class BilTeleOp extends OpMode{
             robot.leftArm.setPower(0.0);
             robot.rightArm.setPower(0.0);
         }
+
+        telemetry.addData("Version:" , "0.1");
+        telemetry.update();
     }
 }

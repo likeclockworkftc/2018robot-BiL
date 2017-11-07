@@ -48,6 +48,12 @@ public class BilAutonomous extends LinearOpMode {
 
 
         // Robot runs on time and power, hope for the best xd
+
         movement.directDrive(FORWARD_SPEED, FORWARD_SPEED);
+        runtime.reset();
+
+        while (opModeIsActive() && (runtime.seconds()) < 3.0);
+
+
     }
 }

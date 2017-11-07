@@ -76,10 +76,10 @@ public class HardwarePushbot
         leftArm.setDirection(DcMotor.Direction.REVERSE);
 
         // Define and initialize ALL installed servos.
-        leftClaw = hwMap.get(Servo.class, "left_hand");
         rightClaw = hwMap.get(Servo.class, "right_hand");
-        leftClaw.setPosition(MID_SERVO);
+        leftClaw = hwMap.get(Servo.class, "left_hand");
         rightClaw.setPosition(MID_SERVO);
+        leftClaw.setPosition(MID_SERVO);
     }
 }
 
