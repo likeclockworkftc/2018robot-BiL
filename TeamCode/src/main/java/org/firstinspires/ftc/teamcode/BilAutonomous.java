@@ -49,22 +49,28 @@ public class BilAutonomous extends LinearOpMode {
         // Robot runs on time and power, hope for the best xd
 
         // Movement ( TIME AND POWER TO BE DETERMINED )
-        // 1:  Stop and turn left 90 degrees
+        // 1:  Stop and turn right 90 degrees
         movement.directTankDrive(FORWARD_SPEED, 0);
         runtime.reset();
         while (opModeIsActive() && (runtime.seconds() == 3.0)) {
             telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
+<<<<<<< Updated upstream
         }
             // 2: Stop and turn right 90 degrees
         movement.directTankDrive(0, FORWARD_SPEED);
         runtime.reset();
         while(opModeIsActive() && (runtime.seconds() == 3.0)) {
+=======
+            // 2: Stop and turn left 90 degrees
+            movement.directTankDrive(0, FORWARD_SPEED);
+>>>>>>> Stashed changes
             telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
         }
         // 3: Forward for [enter number here] seconds
         movement.directTankDrive(FORWARD_SPEED, FORWARD_SPEED);
+<<<<<<< Updated upstream
         runtime.reset();
         while(opModeIsActive() && (runtime.seconds() == 2)) {
             telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
@@ -73,6 +79,11 @@ public class BilAutonomous extends LinearOpMode {
 
         idle();
 
+=======
+        telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
+        telemetry.update();
+// Movemnt
+>>>>>>> Stashed changes
     }
 }
 
