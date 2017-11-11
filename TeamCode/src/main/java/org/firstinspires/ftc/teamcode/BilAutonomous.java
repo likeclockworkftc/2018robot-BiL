@@ -40,12 +40,11 @@ public class BilAutonomous extends LinearOpMode {
             ExceptionHandling.standardExceptionHandling(e, this);
         }
 
-        telemetry.addData("Status", "Ready to rumble");
+        telemetry.addData("Status", "Ready to start");
         telemetry.update();
 
         // Press start to play
         waitForStart();
-
 
         // Robot runs on time and power, hope for the best xd
 
@@ -56,14 +55,23 @@ public class BilAutonomous extends LinearOpMode {
         while (opModeIsActive() && (runtime.seconds() == 3.0)) {
             telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
+        }
             // 2: Stop and turn right 90 degrees
-            movement.directTankDrive(0, FORWARD_SPEED);
+        movement.directTankDrive(0, FORWARD_SPEED);
+        runtime.reset();
+        while(opModeIsActive() && (runtime.seconds() == 3.0)) {
             telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
-        }   // 3: Forward for [enter number here] seconds
+        }
+        // 3: Forward for [enter number here] seconds
         movement.directTankDrive(FORWARD_SPEED, FORWARD_SPEED);
-        telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-        telemetry.update();
+        runtime.reset();
+        while(opModeIsActive() && (runtime.seconds() == 2)) {
+            telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
+            telemetry.update();
+        }
+
+        idle();
 
     }
 }
