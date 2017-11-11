@@ -60,7 +60,12 @@ public class BilTeleOp extends OpMode{
         //+ = goes backwards
         //OUTDATED
 
+
+        // movement.directTankDrive() = directTankDrive(left stick power to left motor, right stick power to right motor)
+        // movement.directDrive() = directDrive( right trigger sets power forward to both motors,
+        // left trigger sets power backwards to both motors)
         movement.directTankDrive(-gamepad1.left_stick_y, -gamepad1.right_stick_y);
+        movement.directDrive(gamepad1.right_trigger, -gamepad1.left_trigger);
 
         //person 2 controls robots arms/claws
         // Use game pad left & right Bumpers to open and close the claw
@@ -91,8 +96,5 @@ public class BilTeleOp extends OpMode{
             robot.leftArm.setPower(0.0);
             robot.rightArm.setPower(0.0);
         }
-
-        telemetry.addData("Version:" , "0.1");
-        telemetry.update();
     }
 }
