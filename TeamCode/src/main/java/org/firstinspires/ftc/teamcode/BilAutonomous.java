@@ -55,35 +55,27 @@ public class BilAutonomous extends LinearOpMode {
         while (opModeIsActive() && (runtime.seconds() == 3.0)) {
             telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
-<<<<<<< Updated upstream
+
         }
-            // 2: Stop and turn right 90 degrees
+        // 2: Stop and turn right 90 degrees
         movement.directTankDrive(0, FORWARD_SPEED);
         runtime.reset();
-        while(opModeIsActive() && (runtime.seconds() == 3.0)) {
-=======
+        while (opModeIsActive() && (runtime.seconds() == 3.0)) {
             // 2: Stop and turn left 90 degrees
             movement.directTankDrive(0, FORWARD_SPEED);
->>>>>>> Stashed changes
             telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
         }
         // 3: Forward for [enter number here] seconds
         movement.directTankDrive(FORWARD_SPEED, FORWARD_SPEED);
-<<<<<<< Updated upstream
         runtime.reset();
-        while(opModeIsActive() && (runtime.seconds() == 2)) {
+        while (opModeIsActive() && (runtime.seconds() == 2)) {
             telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
         }
 
         idle();
 
-=======
-        telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-        telemetry.update();
-// Movemnt
->>>>>>> Stashed changes
     }
 }
 
