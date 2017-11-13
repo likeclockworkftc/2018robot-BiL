@@ -23,58 +23,65 @@ public class BilAutonomous extends LinearOpMode {
     private double FORWARD_SPEED = 0.5;
     private double BACKWARDS_SPEED = 0.5;
 
+    private void autoinit() throws Exception {
+        HardwareBuilder hb = new HardwareBuilder(hardwareMap);
+        hb.setMotorConfig(Hardware.MotorMode.TWO_MOTORS, Hardware.MotorType.TETRIX_PITSCO)
+                .addMotorFL("motor_l")
+                .addMotorFR("motor_r");
+        this.hardware = hb.build();
+        hb = null;
+        hardware.init();
+        movement = new Movement(hardware, this);
+        movement.setVerbose(true);
+    }
+
+
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() {
 
         try {
-            HardwareBuilder hb = new HardwareBuilder(hardwareMap);
-            hb.setMotorConfig(Hardware.MotorMode.TWO_MOTORS, Hardware.MotorType.TETRIX_PITSCO)
-                    .addMotorFL("motor_l")
-                    .addMotorFR("motor_r");
-            this.hardware = hb.build();
-            hb = null;
-            hardware.init();
-            movement = new Movement(hardware, this);
-            movement.setVerbose(true);
-        } catch (Exception e) {
-            ExceptionHandling.standardExceptionHandling(e, this);
-        }
+            autoinit();
 
-        telemetry.addData("Status", "Ready to start");
-        telemetry.update();
-
-        // Press start to play
-        waitForStart();
-
-        // Robot runs on time and power, hope for the best xd
-
-        // Movement ( TIME AND POWER TO BE DETERMINED )
-        // 1:  Stop and turn right 90 degrees
-        movement.directTankDrive(FORWARD_SPEED, 0);
-        runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() == 3.0)) {
-            telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
+            telemetry.addData("Status", "Ready to start");
             telemetry.update();
 
-        }
-        // 2: Stop and turn right 90 degrees
-        movement.directTankDrive(0, FORWARD_SPEED);
-        runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() == 3.0)) {
-            // 2: Stop and turn left 90 degrees
-            movement.directTankDrive(0, FORWARD_SPEED);
-            telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
-        // 3: Forward for [enter number here] seconds
-        movement.directTankDrive(FORWARD_SPEED, FORWARD_SPEED);
-        runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() == 2)) {
-            telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
+            waitForStart();
 
-        idle();
+            if (opModeIsActive()) {
+                // Robot runs on time and power, hope for the best xd
+
+                // Movement ( TIME AND POWER TO BE DETERMINED )
+                // 1:  Stop and turn right 90 degrees
+                movement.directTankDrive(FORWARD_SPEED, 0);
+                runtime.reset();
+                while (opModeIsActive() && (runtime.seconds() == 3.0)) {
+                    telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
+                    telemetry.update();
+
+                }
+                // 2: Stop and turn right 90 degrees
+                movement.directTankDrive(0, FORWARD_SPEED);
+                runtime.reset();
+                while (opModeIsActive() && (runtime.seconds() == 3.0)) {
+                    // 2: Stop and turn left 90 degrees
+                    movement.directTankDrive(0, FORWARD_SPEED);
+                    telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
+                    telemetry.update();
+                }
+                // 3: Forward for [enter number here] seconds
+                movement.directTankDrive(FORWARD_SPEED, FORWARD_SPEED);
+                runtime.reset();
+                while (opModeIsActive() && (runtime.seconds() == 2)) {
+                    telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
+                    telemetry.update();
+                }
+
+                idle();
+
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 }
