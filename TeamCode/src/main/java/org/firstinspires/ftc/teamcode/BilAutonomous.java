@@ -51,7 +51,7 @@ public class BilAutonomous extends LinearOpMode {
                 // Robot runs on time and power, hope for the best xd
 
                 // Movement ( TIME AND POWER TO BE DETERMINED )
-                // 1:  Stop and turn right 90 degrees
+                // 1:  Stop and turn right [tbd] degrees
                 movement.directTankDrive(FORWARD_SPEED, -FORWARD_SPEED);
                 runtime.reset();
                 while (opModeIsActive() && (runtime.seconds() == 1.0)) {
@@ -59,11 +59,11 @@ public class BilAutonomous extends LinearOpMode {
                     telemetry.update();
                 }
 
-                // 2: Stop and turn right 90 degrees
+                // 2: Stop and turn right [tbd] degrees
                 movement.directTankDrive(0, FORWARD_SPEED);
                 runtime.reset();
                 while (opModeIsActive() && (runtime.seconds() == 1.0)) {
-                    // 2: Stop and turn left 90 degrees
+                    // 2: Stop and turn left [tbd] degrees
                     movement.directTankDrive(0, FORWARD_SPEED);
                     telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
                     telemetry.update();
