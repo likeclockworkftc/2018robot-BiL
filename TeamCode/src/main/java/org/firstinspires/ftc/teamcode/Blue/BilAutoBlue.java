@@ -73,14 +73,14 @@ public class BilAutoBlue extends LinearOpMode {
 
                 // Movement ( TIME AND POWER TO BE DETERMINED )
                 // 1:  Stop and turn right 90 degrees
-                movement.directTankDrive(FORWARD_SPEED, -FORWARD_SPEED);
+                movement.directTankDrive(FORWARD_SPEED, FORWARD_SPEED);
                 runtime.reset();
                 while (opModeIsActive() && (runtime.seconds() < 1.0)) {
                     telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
                     telemetry.update();
                 }
 
-                movement.directTankDrive(FORWARD_SPEED, FORWARD_SPEED);
+                movement.directTankDrive(FORWARD_SPEED, -FORWARD_SPEED);
                 runtime.reset();
                 while (opModeIsActive() && (runtime.seconds() < 1.5)) {
                     telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
@@ -88,19 +88,11 @@ public class BilAutoBlue extends LinearOpMode {
                 }
 
                 // 2: Stop and turn right 90 degrees
-                movement.directTankDrive(-FORWARD_SPEED, FORWARD_SPEED);
-                runtime.reset();
-                while (opModeIsActive() && (runtime.seconds() < 2.0)) {
-                    // 2: Stop and turn left 90 degrees
-                    movement.directTankDrive(0, FORWARD_SPEED);
-                    telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-                    telemetry.update();
-                }
-
-                // 3: Forward for [enter number here] secods
-                movement.directTankDrive(BACKWARDS_SPEED, BACKWARDS_SPEED);
+                movement.directTankDrive(FORWARD_SPEED, FORWARD_SPEED);
                 runtime.reset();
                 while (opModeIsActive() && (runtime.seconds() < 1.0)) {
+                    // 2: Stop and turn left 90 degrees
+                    movement.directTankDrive(0, FORWARD_SPEED);
                     telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
                     telemetry.update();
                 }
