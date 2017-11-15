@@ -80,7 +80,7 @@ public class BilAutoBlue extends LinearOpMode {
                     telemetry.update();
                 }
 
-                movement.directTankDrive(FORWARD_SPEED, -FORWARD_SPEED);
+                movement.directTankDrive(-FORWARD_SPEED, FORWARD_SPEED);
                 runtime.reset();
                 while (opModeIsActive() && (runtime.seconds() < 1.5)) {
                     telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
