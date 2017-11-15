@@ -70,7 +70,7 @@ public class BilAutoRed extends LinearOpMode {
                     telemetry.update();
                 }
 
-                // Movement ( TIME AND POWER TO BE DETERMINED )
+                // Movement
                 // 1:  go forward
                 movement.directTankDrive(FORWARD_SPEED, -FORWARD_SPEED);
                 runtime.reset();
