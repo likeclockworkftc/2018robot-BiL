@@ -30,6 +30,7 @@ public class BilAutoRed extends LinearOpMode {
     private double clawOffset = 1;
 
     private double ARM_UP_POWER = -0.35;
+    private double ARM_DOWN_POWER = 0.35;
 
     private void autoinit() throws Exception {
         HardwareBuilder hb = new HardwareBuilder(hardwareMap);
@@ -70,7 +71,7 @@ public class BilAutoRed extends LinearOpMode {
                 }
 
                 // Movement ( TIME AND POWER TO BE DETERMINED )
-                // 1:  Stop and turn right 90 degrees
+                // 1:  go forward
                 movement.directTankDrive(FORWARD_SPEED, -FORWARD_SPEED);
                 runtime.reset();
                 while (opModeIsActive() && (runtime.seconds() < 1.0)) {
@@ -85,32 +86,13 @@ public class BilAutoRed extends LinearOpMode {
                     telemetry.update();
                 }
 
-                // 2: Stop and turn right 90 degrees
-                movement.directTankDrive(-FORWARD_SPEED, FORWARD_SPEED);
-                runtime.reset();
-                while (opModeIsActive() && (runtime.seconds() < 2.0)) {
-                    // 2: Stop and turn left 90 degrees
-                    movement.directTankDrive(0, FORWARD_SPEED);
-                    telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-                    telemetry.update();
-                }
-
-                // 3: Forward for [enter number here] seconds
-                movement.directTankDrive(BACKWARDS_SPEED, BACKWARDS_SPEED);
+                robot.leftArm.setPower(ARM_DOWN_POWER);
+                robot.rightArm.setPower(ARM_DOWN_POWER);
                 runtime.reset();
                 while (opModeIsActive() && (runtime.seconds() < 1.0)) {
                     telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
                     telemetry.update();
                 }
-
-//                movement.directTankDrive(FORWARD_SPEED, -FORWARD_SPEED);
-//                runtime.reset();
-//                while (opModeIsActive() && (runtime.seconds() < 3.0)) {
-//                    // 2: Stop and turn left 90 degrees
-//                    movement.directTankDrive(0, FORWARD_SPEED);
-//                    telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-//                    telemetry.update();
-//                }
 
 
                 idle();
