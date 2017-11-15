@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.util.Range;
 import com.vvftc.ninevolt.core.hw.Hardware;
 import com.vvftc.ninevolt.core.hw.HardwareBuilder;
 import com.vvftc.ninevolt.core.hw.drivetrain.standard.Movement;
+import com.vvftc.ninevolt.util.ExceptionHandling;
 
 import org.firstinspires.ftc.teamcode.HardwarePushbot;
 
@@ -15,7 +16,7 @@ import org.firstinspires.ftc.teamcode.HardwarePushbot;
  */
 
 @Autonomous(name = "Bil Auto Blue Alliance1", group = "robot")
-public class AutoBlueAlliance2 extends LinearOpMode {
+public class BilAutoBlue extends LinearOpMode {
 
     private Movement movement;
     private Hardware hardware;
@@ -30,6 +31,7 @@ public class AutoBlueAlliance2 extends LinearOpMode {
     private double clawOffset = 1;
 
     private double ARM_UP_POWER = -0.35;
+    private double ARM_DOWN_POWER = 0.35;
 
     private void autoinit() throws Exception {
         HardwareBuilder hb = new HardwareBuilder(hardwareMap);
@@ -95,7 +97,7 @@ public class AutoBlueAlliance2 extends LinearOpMode {
                     telemetry.update();
                 }
 
-                // 3: Forward for [enter number here] seconds
+                // 3: Forward for [enter number here] secods
                 movement.directTankDrive(BACKWARDS_SPEED, BACKWARDS_SPEED);
                 runtime.reset();
                 while (opModeIsActive() && (runtime.seconds() < 1.0)) {
@@ -103,15 +105,13 @@ public class AutoBlueAlliance2 extends LinearOpMode {
                     telemetry.update();
                 }
 
-//                movement.directTankDrive(FORWARD_SPEED, -FORWARD_SPEED);
-//                runtime.reset();
-//                while (opModeIsActive() && (runtime.seconds() < 3.0)) {
-//                    // 2: Stop and turn left 90 degrees
-//                    movement.directTankDrive(0, FORWARD_SPEED);
-//                    telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-//                    telemetry.update();
-//                }
-
+                robot.leftArm.setPower(ARM_DOWN_POWER);
+                robot.rightArm.setPower(ARM_DOWN_POWER);
+                runtime.reset();
+                while (opModeIsActive() && (runtime.seconds() < 1.0)) {
+                    telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
+                    telemetry.update();
+                }
 
                 idle();
 

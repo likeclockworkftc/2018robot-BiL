@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.HardwarePushbot;
  */
 
 @Autonomous(name = "Bil Auto Blue Alliance1", group = "robot")
-public class AutoRedAlliance2 extends LinearOpMode {
+public class BilAutoRed extends LinearOpMode {
 
     private Movement movement;
     private Hardware hardware;
