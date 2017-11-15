@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.HardwarePushbot;
  * Created by ryankoo on 9/19/17.
  */
 
-@Autonomous(name = "BilAutoRed ", group = "robot")
+@Autonomous(name = "BilAutoRed0", group = "robot")
 public class BilAutoRed extends LinearOpMode {
 
     private Movement movement;
@@ -25,6 +25,7 @@ public class BilAutoRed extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
 
     private double FORWARD_SPEED = 0.37;
+    private double TURN_SPEED = 0.35;
     private double BACKWARDS_SPEED = -0.37;
 
     private double clawOffset = 1;
@@ -59,9 +60,10 @@ public class BilAutoRed extends LinearOpMode {
 
             if (opModeIsActive()) {
                 // Robot runs on time and power, hope for the best xd
-
+                // close claws
                 clawOffset = Range.clip(clawOffset, -0.5, 0.5);
 
+                // Move Arm up
                 robot.leftArm.setPower(ARM_UP_POWER);
                 robot.rightArm.setPower(ARM_UP_POWER);
                 runtime.reset();
@@ -70,6 +72,7 @@ public class BilAutoRed extends LinearOpMode {
                     telemetry.update();
                 }
 
+                // 1:  Move Forward
                 movement.directTankDrive(FORWARD_SPEED, FORWARD_SPEED);
                 runtime.reset();
                 while (opModeIsActive() && (runtime.seconds() < 1.5)) {
@@ -77,22 +80,23 @@ public class BilAutoRed extends LinearOpMode {
                     telemetry.update();
                 }
 
-                // Movement
-                // 1:  go forward
-                movement.directTankDrive(FORWARD_SPEED, -FORWARD_SPEED);
+                // 2: Turn
+                movement.directTankDrive(TURN_SPEED, -TURN_SPEED);
                 runtime.reset();
                 while (opModeIsActive() && (runtime.seconds() < 1.0)) {
                     telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
                     telemetry.update();
                 }
 
+                // 3: Move forward SLIGHTLY
                 movement.directTankDrive(FORWARD_SPEED, FORWARD_SPEED);
                 runtime.reset();
-                while (opModeIsActive() && (runtime.seconds() < 1.0)) {
+                while (opModeIsActive() && (runtime.seconds() < 0.35)) {
                     telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
                     telemetry.update();
                 }
 
+                // Move arm down, claw releases crypto block
                 robot.leftArm.setPower(ARM_DOWN_POWER);
                 robot.rightArm.setPower(ARM_DOWN_POWER);
                 runtime.reset();
@@ -101,9 +105,7 @@ public class BilAutoRed extends LinearOpMode {
                     telemetry.update();
                 }
 
-
                 idle();
-
             }
         } catch (Exception e){
             e.printStackTrace();
