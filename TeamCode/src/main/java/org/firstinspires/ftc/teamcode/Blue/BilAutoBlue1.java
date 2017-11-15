@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Red;
+package org.firstinspires.ftc.teamcode.Blue;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -14,8 +14,8 @@ import org.firstinspires.ftc.teamcode.HardwarePushbot;
  * Created by ryankoo on 9/19/17.
  */
 
-@Autonomous(name = "BilAutoRed ", group = "robot")
-public class BilAutoRed extends LinearOpMode {
+@Autonomous(name = "BilAutoBlue", group = "robot")
+public class BilAutoBlue1 extends LinearOpMode {
 
     private Movement movement;
     private Hardware hardware;
@@ -70,25 +70,29 @@ public class BilAutoRed extends LinearOpMode {
                     telemetry.update();
                 }
 
+                // Movement ( TIME AND POWER TO BE DETERMINED )
+                // 1:  Stop and turn right 90 degrees
                 movement.directTankDrive(FORWARD_SPEED, FORWARD_SPEED);
+                runtime.reset();
+                while (opModeIsActive() && (runtime.seconds() < 1.0)) {
+                    telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
+                    telemetry.update();
+                }
+
+                movement.directTankDrive(-FORWARD_SPEED, FORWARD_SPEED);
                 runtime.reset();
                 while (opModeIsActive() && (runtime.seconds() < 1.5)) {
                     telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
                     telemetry.update();
                 }
 
-                // Movement
-                // 1:  go forward
-                movement.directTankDrive(FORWARD_SPEED, -FORWARD_SPEED);
-                runtime.reset();
-                while (opModeIsActive() && (runtime.seconds() < 1.0)) {
-                    telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-                    telemetry.update();
-                }
 
+                // 2: Stop and turn right 90 degrees
                 movement.directTankDrive(FORWARD_SPEED, FORWARD_SPEED);
                 runtime.reset();
                 while (opModeIsActive() && (runtime.seconds() < 1.0)) {
+                    // 2: Stop and turn left 90 degrees
+                    movement.directTankDrive(0, FORWARD_SPEED);
                     telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
                     telemetry.update();
                 }
@@ -100,7 +104,6 @@ public class BilAutoRed extends LinearOpMode {
                     telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
                     telemetry.update();
                 }
-
 
                 idle();
 

@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.HardwarePushbot;
  * Created by ryankoo on 9/19/17.
  */
 
-@Autonomous(name = "Bil Auto Blue Alliance1", group = "robot")
+@Autonomous(name = "BilAutoBlue", group = "robot")
 public class BilAutoBlue extends LinearOpMode {
 
     private Movement movement;
@@ -25,8 +25,8 @@ public class BilAutoBlue extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
 
-    private double FORWARD_SPEED = 0.38;
-    private double BACKWARDS_SPEED = -0.38;
+    private double FORWARD_SPEED = 0.37;
+    private double BACKWARDS_SPEED = -0.37;
 
     private double clawOffset = 1;
 
@@ -86,6 +86,7 @@ public class BilAutoBlue extends LinearOpMode {
                     telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
                     telemetry.update();
                 }
+
 
                 // 2: Stop and turn right 90 degrees
                 movement.directTankDrive(FORWARD_SPEED, FORWARD_SPEED);
