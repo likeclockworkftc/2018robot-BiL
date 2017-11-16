@@ -105,6 +105,9 @@ public class BilAutoRed extends LinearOpMode {
                     telemetry.update();
                 }
 
+                telemetry.addData("Status", "Complete — initiate TeleOp Mode NOW");
+                telemetry.update();
+
                 idle();
             }
         } catch (Exception e){
