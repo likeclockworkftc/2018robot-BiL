@@ -7,7 +7,6 @@ import com.qualcomm.robotcore.util.Range;
 import com.vvftc.ninevolt.core.hw.Hardware;
 import com.vvftc.ninevolt.core.hw.HardwareBuilder;
 import com.vvftc.ninevolt.core.hw.drivetrain.standard.Movement;
-import com.vvftc.ninevolt.util.ExceptionHandling;
 
 import org.firstinspires.ftc.teamcode.HardwarePushbot;
 
@@ -15,18 +14,18 @@ import org.firstinspires.ftc.teamcode.HardwarePushbot;
  * Created by ryankoo on 9/19/17.
  */
 
-@Autonomous(name = "BilAutoBlue0", group = "robot")
-public class BilAutoBlue extends LinearOpMode {
+@Autonomous(name = "BilAutoBlue1", group = "robot")
+public class BilAutoBlue1 extends LinearOpMode {
 
     private Movement movement;
     private Hardware hardware;
 
     private HardwarePushbot robot = new HardwarePushbot();
+
     private ElapsedTime runtime = new ElapsedTime();
 
-
-    private double FORWARD_SPEED = 0.35;
-    private double TURN_SPEED = 0.30;
+    private double FORWARD_SPEED = 0.37;
+    private double TURN_SPEED = 0.35;
     private double BACKWARDS_SPEED = -0.37;
 
     private double clawOffset = 1;
@@ -61,7 +60,6 @@ public class BilAutoBlue extends LinearOpMode {
 
             if (opModeIsActive()) {
                 // Robot runs on time and power, hope for the best xd
-
                 // close claws
                 clawOffset = Range.clip(clawOffset, -0.5, 0.5);
 
@@ -93,7 +91,7 @@ public class BilAutoBlue extends LinearOpMode {
                 // 3: Move forward SLIGHTLY
                 movement.directTankDrive(FORWARD_SPEED, FORWARD_SPEED);
                 runtime.reset();
-                while (opModeIsActive() && (runtime.seconds() < 0.35)) {
+                while (opModeIsActive() && (runtime.seconds() < 0.25)) {
                     telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
                     telemetry.update();
                 }
@@ -111,7 +109,6 @@ public class BilAutoBlue extends LinearOpMode {
                 telemetry.update();
 
                 idle();
-
             }
         } catch (Exception e){
             e.printStackTrace();
