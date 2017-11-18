@@ -24,8 +24,8 @@ public class BilAutoRed extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
 
-    private double FORWARD_SPEED = 0.37;
-    private double TURN_SPEED = 0.35;
+    private double FORWARD_SPEED = 0.35;
+    private double TURN_SPEED = 0.39;
     private double BACKWARDS_SPEED = -0.37;
 
     private double clawOffset = 1;
@@ -61,6 +61,17 @@ public class BilAutoRed extends LinearOpMode {
             if (opModeIsActive()) {
                 // Robot runs on time and power, hope for the best xd
                 // close claws
+
+//                robot.leftArm.setPower(ARM_DOWN_POWER);
+//                robot.rightArm.setPower(ARM_DOWN_POWER);
+//                runtime.reset();
+//                while (opModeIsActive() && (runtime.seconds() < 1.0)) {
+//                    telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
+//                    telemetry.update();
+//                }
+//
+//                sleep(1000);
+
                 clawOffset = Range.clip(clawOffset, -0.5, 0.5);
 
                 // Move Arm up
@@ -83,7 +94,7 @@ public class BilAutoRed extends LinearOpMode {
                 // 2: Turn
                 movement.directTankDrive(TURN_SPEED, -TURN_SPEED);
                 runtime.reset();
-                while (opModeIsActive() && (runtime.seconds() < 1.0)) {
+                while (opModeIsActive() && (runtime.seconds() < 1.5)) {
                     telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
                     telemetry.update();
                 }
@@ -91,7 +102,7 @@ public class BilAutoRed extends LinearOpMode {
                 // 3: Move forward SLIGHTLY
                 movement.directTankDrive(FORWARD_SPEED, FORWARD_SPEED);
                 runtime.reset();
-                while (opModeIsActive() && (runtime.seconds() < 0.35)) {
+                while (opModeIsActive() && (runtime.seconds() < 0.5)) {
                     telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
                     telemetry.update();
                 }
