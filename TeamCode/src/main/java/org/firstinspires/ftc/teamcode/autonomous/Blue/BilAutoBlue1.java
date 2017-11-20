@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Red;
+package org.firstinspires.ftc.teamcode.autonomous.Blue;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -8,14 +8,15 @@ import com.vvftc.ninevolt.core.hw.Hardware;
 import com.vvftc.ninevolt.core.hw.HardwareBuilder;
 import com.vvftc.ninevolt.core.hw.drivetrain.standard.Movement;
 
+import org.firstinspires.ftc.teamcode.BilTeleOp;
 import org.firstinspires.ftc.teamcode.HardwarePushbot;
 
 /**
  * Created by ryankoo on 9/19/17.
  */
 
-@Autonomous(name = "BilAutoRed0", group = "robot")
-public class BilAutoRed extends LinearOpMode {
+@Autonomous(name = "BilAutoBlue1", group = "robot")
+public class BilAutoBlue1 extends LinearOpMode {
 
     private Movement movement;
     private Hardware hardware;
@@ -24,11 +25,9 @@ public class BilAutoRed extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
 
-    private double FORWARD_SPEED = 0.35;
-    private double TURN_SPEED = 0.39;
-    private double BACKWARDS_SPEED = -0.37;
+    private double FORWARD_SPEED = 0.39;
 
-    private double clawOffset = 1;
+    private double clawOffset = 0.1;
 
     private double ARM_UP_POWER = -0.35;
     private double ARM_DOWN_POWER = 0.35;
@@ -41,9 +40,9 @@ public class BilAutoRed extends LinearOpMode {
         this.hardware = hb.build();
         hb = null;
         hardware.init();
-        robot.init(hardwareMap);
         movement = new Movement(hardware, this);
         movement.setVerbose(true);
+
     }
 
 
@@ -62,17 +61,11 @@ public class BilAutoRed extends LinearOpMode {
                 // Robot runs on time and power, hope for the best xd
                 // close claws
 
-//                robot.leftArm.setPower(ARM_DOWN_POWER);
-//                robot.rightArm.setPower(ARM_DOWN_POWER);
-//                runtime.reset();
-//                while (opModeIsActive() && (runtime.seconds() < 1.0)) {
-//                    telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-//                    telemetry.update();
-//                }
-//
-//                sleep(1000);
+                robot.init(hardwareMap);
 
                 clawOffset = Range.clip(clawOffset, -0.5, 0.5);
+                robot.rightClaw.setPosition(robot.MID_SERVO - clawOffset);
+                robot.leftClaw.setPosition(robot.MID_SERVO + clawOffset);
 
                 // Move Arm up
                 robot.leftArm.setPower(ARM_UP_POWER);
@@ -83,26 +76,10 @@ public class BilAutoRed extends LinearOpMode {
                     telemetry.update();
                 }
 
-                // 1:  Move Forward
-                movement.directTankDrive(FORWARD_SPEED, FORWARD_SPEED);
-                runtime.reset();
-                while (opModeIsActive() && (runtime.seconds() < 1.5)) {
-                    telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-                    telemetry.update();
-                }
-
-                // 2: Turn
-                movement.directTankDrive(TURN_SPEED, -TURN_SPEED);
-                runtime.reset();
-                while (opModeIsActive() && (runtime.seconds() < 1.5)) {
-                    telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-                    telemetry.update();
-                }
-
                 // 3: Move forward SLIGHTLY
                 movement.directTankDrive(FORWARD_SPEED, FORWARD_SPEED);
                 runtime.reset();
-                while (opModeIsActive() && (runtime.seconds() < 0.5)) {
+                while (opModeIsActive() && (runtime.seconds() < 1.0)) {
                     telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
                     telemetry.update();
                 }
@@ -115,6 +92,8 @@ public class BilAutoRed extends LinearOpMode {
                     telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
                     telemetry.update();
                 }
+
+
 
                 telemetry.addData("Status", "Complete");
                 telemetry.update();
