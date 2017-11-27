@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.modes;
+package org.firstinspires.ftc.teamcode.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -57,7 +57,6 @@ public class BilTeleOp extends OpMode{
         //- = goes forward
         //+ = goes backwards
         //OUTDATED
-
 
         // movement.directTankDrive() = directTankDrive(left stick power to left motor, right stick power to right motor)
         movement.directTankDrive(-gamepad1.left_stick_y, -gamepad1.right_stick_y);

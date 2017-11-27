@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.modes.autonomous.Blue;
+package org.firstinspires.ftc.teamcode.opmodes.autonomous.Red;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -14,8 +14,8 @@ import org.firstinspires.ftc.teamcode.HardwarePushbot;
  * Created by ryankoo on 9/19/17.
  */
 
-@Autonomous(name = "BilAutoBlue1", group = "robot")
-public class BilAutoBlue1 extends LinearOpMode {
+@Autonomous(name = "BilAutoRed0", group = "robot")
+public class BilAutoRed extends LinearOpMode {
 
     private Movement movement;
     private Hardware hardware;
@@ -24,7 +24,7 @@ public class BilAutoBlue1 extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
 
-    private double FORWARD_SPEED = 0.39;
+    private double FORWARD_SPEED = 0.37;
 
     private double clawOffset = 0.1;
 
@@ -41,7 +41,6 @@ public class BilAutoBlue1 extends LinearOpMode {
         hardware.init();
         movement = new Movement(hardware, this);
         movement.setVerbose(true);
-
     }
 
 
@@ -75,10 +74,10 @@ public class BilAutoBlue1 extends LinearOpMode {
                     telemetry.update();
                 }
 
-                // 3: Move forward SLIGHTLY
+                // 1:  Move Forward
                 movement.directTankDrive(FORWARD_SPEED, FORWARD_SPEED);
                 runtime.reset();
-                while (opModeIsActive() && (runtime.seconds() < 1.0)) {
+                while (opModeIsActive() && (runtime.seconds() < 0.5)) {
                     telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
                     telemetry.update();
                 }
@@ -91,8 +90,6 @@ public class BilAutoBlue1 extends LinearOpMode {
                     telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
                     telemetry.update();
                 }
-
-
 
                 telemetry.addData("Status", "Complete");
                 telemetry.update();

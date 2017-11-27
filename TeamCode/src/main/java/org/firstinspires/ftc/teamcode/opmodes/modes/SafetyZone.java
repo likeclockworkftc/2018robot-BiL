@@ -1,6 +1,5 @@
-package org.firstinspires.ftc.teamcode.modes.autonomous.Red;
+package org.firstinspires.ftc.teamcode.opmodes.modes;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
@@ -11,11 +10,10 @@ import com.vvftc.ninevolt.core.hw.drivetrain.standard.Movement;
 import org.firstinspires.ftc.teamcode.HardwarePushbot;
 
 /**
- * Created by ryankoo on 9/19/17.
+ * Created by ryankoo on 11/27/17.
  */
 
-@Autonomous(name = "BilAutoRed0", group = "robot")
-public class BilAutoRed extends LinearOpMode {
+public class SafetyZone extends LinearOpMode{
 
     private Movement movement;
     private Hardware hardware;
@@ -24,7 +22,7 @@ public class BilAutoRed extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
 
-    private double FORWARD_SPEED = 0.37;
+    private double FORWARD_SPEED = 0.39;
 
     private double clawOffset = 0.1;
 
@@ -41,6 +39,7 @@ public class BilAutoRed extends LinearOpMode {
         hardware.init();
         movement = new Movement(hardware, this);
         movement.setVerbose(true);
+
     }
 
 
@@ -74,10 +73,10 @@ public class BilAutoRed extends LinearOpMode {
                     telemetry.update();
                 }
 
-                // 1:  Move Forward
+                // 3: Move forward SLIGHTLY
                 movement.directTankDrive(FORWARD_SPEED, FORWARD_SPEED);
                 runtime.reset();
-                while (opModeIsActive() && (runtime.seconds() < 0.5)) {
+                while (opModeIsActive() && (runtime.seconds() < 1.0)) {
                     telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
                     telemetry.update();
                 }
@@ -102,4 +101,3 @@ public class BilAutoRed extends LinearOpMode {
 
     }
 }
-
