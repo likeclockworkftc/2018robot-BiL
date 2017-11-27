@@ -1,16 +1,15 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.modes;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.IntegratingGyroscope;
 import com.qualcomm.robotcore.util.Range;
 import com.vvftc.ninevolt.core.hw.Hardware;
 import com.vvftc.ninevolt.core.hw.HardwareBuilder;
 import com.vvftc.ninevolt.core.hw.drivetrain.standard.Movement;
 import com.vvftc.ninevolt.util.ExceptionHandling;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.HardwarePushbot;
 
 
 /**
@@ -19,7 +18,6 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @TeleOp (name = "Bil", group = "robot")
 public class BilTeleOp extends OpMode{
-
 
     private Hardware hardware;
     private Movement movement;
