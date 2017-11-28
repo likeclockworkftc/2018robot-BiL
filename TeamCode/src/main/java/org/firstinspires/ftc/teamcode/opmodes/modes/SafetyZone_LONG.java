@@ -13,12 +13,12 @@ import org.firstinspires.ftc.teamcode.HardwarePushbot;
  * Created by ryankoo on 11/27/17.
  */
 
-public class SafetyZone extends LinearOpMode{
+public class SafetyZone_LONG{
 
     private Movement movement;
     private Hardware hardware;
-
-    private HardwarePushbot robot = new HardwarePushbot();
+    private HardwarePushbot robot;
+    private LinearOpMode ctx;
 
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -29,36 +29,21 @@ public class SafetyZone extends LinearOpMode{
     private double ARM_UP_POWER = -0.35;
     private double ARM_DOWN_POWER = 0.35;
 
-    private void autoinit() throws Exception {
-        HardwareBuilder hb = new HardwareBuilder(hardwareMap);
-        hb.setMotorConfig(Hardware.MotorMode.TWO_MOTORS, Hardware.MotorType.TETRIX_PITSCO)
-                .addMotorFL("motor_l")
-                .addMotorFR("motor_r");
-        this.hardware = hb.build();
-        hb = null;
-        hardware.init();
-        movement = new Movement(hardware, this);
-        movement.setVerbose(true);
-
+    public void SafetyZone_LONG(Hardware hw, Movement movement, HardwarePushbot rb, LinearOpMode lom) {
+        this.hardware = hw;
+        this.movement = movement;
+        this.robot = rb;
+        this.ctx = lom;
     }
 
-
-    @Override
-    public void runOpMode() {
+    public void run() {
 
         try {
-            autoinit();
 
-            telemetry.addData("Status", "Ready to start");
-            telemetry.update();
 
-            waitForStart();
-
-            if (opModeIsActive()) {
                 // Robot runs on time and power, hope for the best xd
                 // close claws
 
-                robot.init(hardwareMap);
 
                 clawOffset = Range.clip(clawOffset, -0.5, 0.5);
                 robot.rightClaw.setPosition(robot.MID_SERVO - clawOffset);
@@ -68,33 +53,33 @@ public class SafetyZone extends LinearOpMode{
                 robot.leftArm.setPower(ARM_UP_POWER);
                 robot.rightArm.setPower(ARM_UP_POWER);
                 runtime.reset();
-                while (opModeIsActive() && (runtime.seconds() < 1.0)) {
-                    telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-                    telemetry.update();
+                while (ctx.opModeIsActive() && (runtime.seconds() < 1.0)) {
+                    ctx.telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
+                    ctx.telemetry.update();
                 }
 
                 // 3: Move forward SLIGHTLY
                 movement.directTankDrive(FORWARD_SPEED, FORWARD_SPEED);
                 runtime.reset();
-                while (opModeIsActive() && (runtime.seconds() < 1.0)) {
-                    telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-                    telemetry.update();
+                while (ctx.opModeIsActive() && (runtime.seconds() < 1.0)) {
+                    ctx.telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
+                    ctx.telemetry.update();
                 }
 
                 // Move arm down, claw releases crypto block
                 robot.leftArm.setPower(ARM_DOWN_POWER);
                 robot.rightArm.setPower(ARM_DOWN_POWER);
                 runtime.reset();
-                while (opModeIsActive() && (runtime.seconds() < 1.0)) {
-                    telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-                    telemetry.update();
+                while (ctx.opModeIsActive() && (runtime.seconds() < 1.0)) {
+                    ctx.telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
+                    ctx.telemetry.update();
                 }
 
-                telemetry.addData("Status", "Complete");
-                telemetry.update();
+                ctx.telemetry.addData("Status", "Complete");
+                ctx.telemetry.update();
 
-                idle();
-            }
+                ctx.idle();
+
         } catch (Exception e){
             e.printStackTrace();
         }
