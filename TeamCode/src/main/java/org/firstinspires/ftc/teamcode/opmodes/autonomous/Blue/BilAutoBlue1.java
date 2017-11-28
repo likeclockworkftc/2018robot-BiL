@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.opmodes.modes.SafetyZone_LONG;
  * Created by ryankoo on 9/19/17.
  */
 
-@Autonomous(name = "BilAutoBlue1", group = "robot")
+@Autonomous(name = "blueLong", group = "robot")
 public class BilAutoBlue1 extends LinearOpMode {
 
     public SafetyZone_LONG safetyZone;
@@ -22,7 +22,6 @@ public class BilAutoBlue1 extends LinearOpMode {
         telemetry.update();
 
         waitForStart();
-
 
         sleep(2000);
 

@@ -16,15 +16,19 @@ import org.firstinspires.ftc.teamcode.opmodes.modes.SafetyZone_SHORT;
  * Created by ryankoo on 9/19/17.
  */
 
-@Autonomous(name = "BilAutoBlue0", group = "robot")
+@Autonomous(name = "blueShort", group = "robot")
 public class BilAutoBlue extends LinearOpMode {
+
 
     public SafetyZone_SHORT safetyZone;
 
     @Override
     public void runOpMode() {
+
         safetyZone = new SafetyZone_SHORT();
 
+        telemetry.addData("Status", "Ready to start");
+        telemetry.update();
 
         waitForStart();
 
