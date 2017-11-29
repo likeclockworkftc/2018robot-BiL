@@ -25,7 +25,7 @@ public class BilAutoBlue1 extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-
+        robot.init(hardwareMap);
         safetyZone = new SafetyZone_LONG(hardware,movement,robot,ctx);
 
         telemetry.addData("Status", "Ready to start");
@@ -34,8 +34,6 @@ public class BilAutoBlue1 extends LinearOpMode {
         waitForStart();
 
         sleep(2000);
-        // Makes sure claw doesn't open at init
-        robot.init(hardwareMap);
 
         safetyZone.run(); // move robot to safety zone
 

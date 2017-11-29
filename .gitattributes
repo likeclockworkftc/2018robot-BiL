@@ -1,3 +1,8 @@
 FtcRobotController/ merge=theirs
+<<<<<<< HEAD
 NinevoltLib/ merge=theirs
 libs/ merge=theirs
+=======
+libs/ merge=theirs
+gradle/wrapper/gradle-wrapper.properties merge=ours
+>>>>>>> 12110752838bc8fdae4cb77fd9bb54b2aad54905
